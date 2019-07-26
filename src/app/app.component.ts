@@ -1,5 +1,6 @@
 import { Component } from '@angular/core';
-import { Post } from './post';
+import { Post } from './models/post.model';
+import * as firebase from 'firebase'
 
 @Component({
   selector: 'app-root',
@@ -8,9 +9,6 @@ import { Post } from './post';
 })
 export class AppComponent {
 
-  pContent = "Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua";
-  posts = [ new Post("Mon premier post", "Lorem ipsum dolor sit amet, consectetur adipiscing", 2),
-            new Post("Mon deuxième post", "Lorem ipsum dolor sit amet, consectetur adipiscing", -3),
-          new Post("Encore un post", "Lorem ipsum dolor sit amet, consectetur adipiscing", 0)];
+
 
 }

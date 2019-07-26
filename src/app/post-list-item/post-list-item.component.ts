@@ -1,5 +1,6 @@
 import { Component, OnInit, Input } from '@angular/core';
-import { Post } from '../post';
+import { Post } from '../models/post.model';
+import { PostsService } from '../services/posts.service';
 
 @Component({
   selector: 'app-post-list-item',
@@ -10,7 +11,8 @@ export class PostListItemComponent implements OnInit {
 
 
 @Input() post: Post;
-  constructor() { }
+
+  constructor(private postsService: PostsService) { }
 
   ngOnInit() {
   }
@@ -39,7 +41,13 @@ getColor()
 onCompte(nbr)
 {
   this.post.loveIts += nbr;
+  this.postsService.updatePost(this.post);
 
+}
+
+onDelete(id)
+{
+  this.postsService.removePost(id);
 }
 
 }

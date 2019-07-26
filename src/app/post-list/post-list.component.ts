@@ -1,5 +1,8 @@
-import { Component, OnInit, Input } from '@angular/core';
-import { Post } from '../post';
+import { Component, OnInit } from '@angular/core';
+import { Post } from '../models/post.model';
+import { PostsService } from '../services/posts.service';
+import { Subscription } from 'rxjs';
+import { Router } from '@angular/router';
 
 @Component({
   selector: 'app-post-list',
@@ -8,11 +11,26 @@ import { Post } from '../post';
 })
 export class PostListComponent implements OnInit {
 
-@Input() posts: Post[];
+  posts: Post[];
 
-  constructor() { }
+
+  constructor(private postsService: PostsService, private router: Router) { }
+
 
   ngOnInit() {
+    this.postsService.getPosts().subscribe(actionArray => {
+        this.posts = actionArray.map(item => {
+          return {id: item.payload.doc.id,
+            ...item.payload.doc.data() }as Post;
+        });
+
+    }
+ );
+
+
+
   }
+
+
 
 }
